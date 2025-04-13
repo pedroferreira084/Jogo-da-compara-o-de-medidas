@@ -3,6 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import random
 
+if 'mostrar_grafico' not in st.session_state:
+    st.session_state.mostrar_grafico = False
+
 # Função para gerar novas medidas
 def gerar_novas_medidas():
     st.session_state.A, st.session_state.erro_A, st.session_state.B, st.session_state.erro_B = gerar_medidas_balanceadas()
@@ -48,8 +51,6 @@ if 'contador' not in st.session_state:
     st.session_state.contador = 0
 
 
-
-
 # Inicializa medidas se ainda não existem
 if 'A' not in st.session_state:
     gerar_novas_medidas()
@@ -93,8 +94,9 @@ else:
 
 
 # Gráfico com barras de erro
-mostrar_grafico = st.button("Mostrar Gráfico")
-if mostrar_grafico:
+if st.button("📊 Mostrar gráfico"):
+    st.session_state.mostrar_grafico = True
+if st.session_state.mostrar_grafico:
     plt.figure(figsize=(3, 1))
     plt.errorbar(1.4, A, yerr=erro_A, fmt='o', label="A", capsize=5)
     plt.errorbar(1.6, B, yerr=erro_B, fmt='o', label="B", capsize=5)
