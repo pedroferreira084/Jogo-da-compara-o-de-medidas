@@ -10,6 +10,7 @@ if 'mostrar_grafico' not in st.session_state:
 def gerar_novas_medidas():
     st.session_state.A, st.session_state.erro_A, st.session_state.B, st.session_state.erro_B = gerar_medidas_balanceadas()
     st.session_state.contador += 1  # força nova chave
+    st.session_state.mostrar_grafico = False  # esconde o gráfico ao iniciar nova rodada
     if 'resposta' in st.session_state:
         del st.session_state['resposta']
     st.rerun()
